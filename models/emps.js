@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
- const p = path.join(
+const p = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'employ.json'
@@ -14,10 +14,10 @@ const getemployeesFromFile = cb => {
       cb(JSON.parse(fileContent));
     }
   });
-}; 
+};
 module.exports = class Employee {
-  constructor(id,fN,lN,uE,uPN,uG,dfb,iA,A) { 
-    this.Id =id;
+  constructor(id, fN, lN, uE, uPN, uG, dfb, iA, A) {
+    this.Id = id;
     this.firstName = fN;
     this.LastName = lN;
     this.useremail = uE;
@@ -34,13 +34,13 @@ module.exports = class Employee {
       if (this.Id) {
         const existingEmp = employees.findIndex(p => p.Id === this.Id);
         const updateEmp = [...employees];
-        updateEmp[existingEmp] = this; 
+        updateEmp[existingEmp] = this;
         fs.writeFile(p, JSON.stringify(updateEmp), err => {
           console.log(err);
         });
       } else {
-    this.Id = Math.random().toString();
-    employees.push(this);
+        this.Id = Math.random().toString();
+        employees.push(this);
         fs.writeFile(p, JSON.stringify(employees), err => {
           console.log(err);
         });
@@ -51,21 +51,21 @@ module.exports = class Employee {
   static fetchAll(cb) {
     getemployeesFromFile(cb);
   }
-  static getbyId(id,cb){
+  static getbyId(id, cb) {
     getemployeesFromFile(employees => {
-    const emp = employees.find(p =>  p.Id === id);    
-    cb(emp)
+      const emp = employees.find(p => p.Id === id);
+      cb(emp)
     });
   }
-  static rembyId(id,cb) {
+  static rembyId(id, cb) {
     getemployeesFromFile(employees => {
-    const delemp = employees.filter(d =>  d.Id !== id);    
-    cb(delemp)
-    fs.writeFile(p, JSON.stringify(delemp), err => {
-      console.log(err);
-    });
+      const delemp = employees.filter(d => d.Id !== id);
+      cb(delemp)
+      fs.writeFile(p, JSON.stringify(delemp), err => {
+        console.log(err);
+      });
     });
   }
- 
+
 
 };
