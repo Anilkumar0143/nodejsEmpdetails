@@ -4,7 +4,7 @@ let users = []
 const p = path.join(
   path.dirname(process.mainModule.filename),
   'data',
-  'employ.json'
+  'editedEmp.json'
 );
 
 const getemployeesFromFile = cb => {
@@ -16,17 +16,17 @@ const getemployeesFromFile = cb => {
     }
   });
 }; 
-module.exports = class Employee {
+module.exports = class EditedEmployee {
   constructor(id,fN,lN,uE,uPN,uG,dfb,iA,A) { 
-    this.Id =id;
-    this.firstName = fN;
-    this.LastName = lN;
-    this.useremail = uE;
-    this.userPhoneNumber = uPN;
-    this.gender = uG;
-    this.dfb = dfb;
-    this.ip_address = iA;
-    this.Accepted = A;
+    this.eId =id;
+    this.efirstName = fN;
+    this.eLastName = lN;
+    this.euseremail = uE;
+    this.euserPhoneNumber = uPN;
+    this.egender = uG;
+    this.edfb = dfb;
+    this.eip_address = iA;
+    this.eAccepted = A;
 
   }
 
@@ -57,16 +57,5 @@ module.exports = class Employee {
     const emp = employees.find(p =>  p.Id === id);    
     cb(emp)
     });
-  }
-  static rembyId(id,cb) {
-    getemployeesFromFile(employees => {
-    const delemp = employees.filter(d =>  d.Id !== id);    
-    cb(delemp)
-    fs.writeFile(p, JSON.stringify(delemp), err => {
-      console.log(err);
-    });
-    });
-  }
- 
-
+  } 
 };
