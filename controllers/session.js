@@ -16,9 +16,9 @@ exports.postAddEmp = (req, res, next) => {
     const dfb = req.body.dfb;
     const ip_address = req.body.ip_address;
     const Accepted = req.body.Accepted;
-    const employee = new Employee( firstName,LastName, useremail,userPhoneNumber,gender,dfb,ip_address,Accepted)
+    const employee = new Employee(null, firstName,LastName, useremail,userPhoneNumber,gender,dfb,ip_address,Accepted)
     employee.save();
-    res.redirect('/');
+    res.redirect('/admin');
 } 
 exports.getEditEmp = (req, res, next) => {
     res.render('session/edit-emp', {
@@ -48,7 +48,7 @@ exports.posteditedEmps = (req, res, next) => {
 exports.geteditingemployee = (req, res, next) => {
     const empID = req.params.empId;
     Employee.getbyId(empID, employees => {
-        console.log(JSON.stringify(employees) );
+        // console.log(JSON.stringify(employees) );
         res.render('session/edit-emp', {
             user: employees,
             pageTitle: 'editing Employees', 

@@ -5,7 +5,7 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
     <div class="m-5 text-center">
-        <% if (edtUser.length > 0) { %>
+        <% if (user.length > 0) { %>
             <h2 class="m-5">Edited Employees</h2>
             <table class="table">
             <thead class="thead-dark">
@@ -21,32 +21,32 @@
                 </tr>
             </thead>
             <tbody>
-                <% for (let eEmployees of edtUser) { %>
+                <% for (let employees of user ) { %>
                 <tr>
                     <td>
-                        <%= eEmployees.Id %>
+                        <%= employees.Id %>
                     </td>
                     <td>
-                        <%= eEmployees.efirstName %>
-                        <%= eEmployees.eLastName %>
+                        <%= employees. firstName %>
+                        <%= employees.LastName %>
                     </td>
                     <td>
-                        <%= eEmployees.euseremail %>
+                        <%= employees.useremail %>
                     </td>
                     <td>
-                        <%= eEmployees.euserPhoneNumber %>
+                        <%= employees.userPhoneNumber %>
                     </td>
                     <td>
-                        <%= eEmployees.egender %>
+                        <%= employees.gender %>
                     </td>
                     <td>
-                        <%= eEmployees.edfb %>
+                        <%= employees.dfb %>
                     </td>
                     <td>
-                        <%= eEmployees.eip_address %>
+                        <%= employees.ip_address %>
                     </td>
                     <td>
-                        <%= eEmployees.eAccepted %>
+                        <%= employees.Accepted %>
                     </td>
                    
                 </tr>
