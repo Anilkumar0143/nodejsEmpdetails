@@ -12,6 +12,7 @@ router.get('/admin', employeesController.getAdmin);
 router.get('/edited', employeesController.geteditedEmps);
 router.get('/admin/:empId', employeesController.getemployee);
 router.get('/deleted/:empId',employeesController.getdeletedEmps);
+//  router.post('/deleted',employeesController.postdeletedEmps);
 
 module.exports = router;
  

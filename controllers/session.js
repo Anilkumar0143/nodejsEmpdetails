@@ -1,4 +1,5 @@
 const Employee = require('../models/emps') 
+const EditedEmployee = require('../models/editedEmps') 
 exports.getAddEmp = (req, res, next) => {
     res.render('session/add-emp', {
         pageTitle: 'Add Employees',
@@ -40,7 +41,9 @@ exports.posteditedEmps = (req, res, next) => {
     const eip_address = req.body.eip_address;
     const eAccepted = req.body.eAccepted;
     const eEmployee = new Employee(Id, efirstName,eLastName, euseremail,euserPhoneNumber,egender,edfb,eip_address,eAccepted)
+    const edtEmployee = new EditedEmployee(Id, efirstName,eLastName, euseremail,euserPhoneNumber,egender,edfb,eip_address,eAccepted)
     eEmployee.save();
+    edtEmployee.save();
     res.redirect('/edited');
 }
 

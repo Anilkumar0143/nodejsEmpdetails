@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-let users = []
-const p = path.join(
+ const p = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'employ.json'
@@ -10,7 +9,7 @@ const p = path.join(
 const getemployeesFromFile = cb => {
   fs.readFile(p, (err, fileContent) => {
     if (err) {
-      cb(users);
+      cb([]);
     } else {
       cb(JSON.parse(fileContent));
     }

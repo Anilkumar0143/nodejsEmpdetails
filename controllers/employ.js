@@ -1,9 +1,9 @@
 const Employee = require('../models/emps') 
+const EditEmployee = require('../models/editedEmps') 
 
 
 exports.getemp = (req, res, next) => {
- 
-      Employee.fetchAll(employees => {
+       Employee.fetchAll(employees => {
         res.render('employees/emp', {
             user: employees,
             pageTitle: 'All Employees',
@@ -26,20 +26,8 @@ exports.getAdmin = (req, res, next) => {
     });
 }
 
-exports.geteditedEmps = (req, res, next) => {
-    Employee.fetchAll(employees => {
-        res.render('employees/edited-emp', {
-            user: employees,
-            pageTitle: 'All Employees',
-            hasUsers: employees.length > 0,
-            activeEmp: true,
-            productCSS: true
-        })
-    });
-}
 
-
-
+ 
 
 //geting required emp detils 
 exports.getemployee = (req, res, next) => {
@@ -55,13 +43,24 @@ exports.getemployee = (req, res, next) => {
         })
     }) 
 }  
+exports.geteditedEmps = (req, res, next) => {
+    EditEmployee.fetchAll(employees => {
+        res.render('employees/edited-emp', {
+            user: employees,
+            pageTitle: 'All Employees',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
+        })
+    });
+}
 
 exports.getdeletedEmps = (req, res) => {
     const empID = req.params.empId; 
-    console.log(empID);
-
+    // console.log(empID);
     Employee.rembyId(empID, employees => {
         console.log(employees);
         res.redirect('/');
     }) 
 }   
+   
