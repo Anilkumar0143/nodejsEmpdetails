@@ -13,6 +13,7 @@ router.get('/edited', employeesController.geteditedEmps);
 router.get('/admin/:empId', employeesController.getemployee);
 router.get('/deleted/:empId',employeesController.getdeletedEmps);
 //  router.post('/deleted',employeesController.postdeletedEmps);
+// router.post('/deleted/:empId',employeesController.postselectedEmp);
 
 module.exports = router;
  

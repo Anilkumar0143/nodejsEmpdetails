@@ -36,13 +36,13 @@ module.exports = class Employee {
         const updateEmp = [...employees];
         updateEmp[existingEmp] = this;
         fs.writeFile(p, JSON.stringify(updateEmp), err => {
-          console.log(err);
+          console.log(err,' in updating emp');
         });
       } else {
         this.Id = Math.random().toString();
         employees.push(this);
         fs.writeFile(p, JSON.stringify(employees), err => {
-          console.log(err);
+          console.log(err," in adding new emp");
         });
       }
     });
@@ -62,7 +62,7 @@ module.exports = class Employee {
       const delemp = employees.filter(d => d.Id !== id);
       cb(delemp)
       fs.writeFile(p, JSON.stringify(delemp), err => {
-        console.log(err);
+        console.log(err,' in delet');
       });
     });
   }
