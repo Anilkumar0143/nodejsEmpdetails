@@ -1,6 +1,6 @@
 const Employee = require('../models/emps')
 const EditEmployee = require('../models/editedEmps')
-const selectedEmp = require('../models/selected')
+const selectedEmp = require('../models/deleted')
 
 
 exports.getemp = (req, res, next) => {
@@ -27,6 +27,17 @@ exports.getAdmin = (req, res, next) => {
     });
 }
 
+exports.getempCards = (req, res, next) => {
+    Employee.fetchAll(employees => {
+        res.render('employees/empCards', {
+            user: employees,
+            pageTitle: 'All Employees Card View',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
+        })
+    });
+}
 
 
 
@@ -58,53 +69,23 @@ exports.geteditedEmps = (req, res, next) => {
 // //deleting and geting remaining emp details and updating in / employ.json
 exports.getdeletedEmps = (req, res) => {
     const empID = req.params.empId;
-    console.log(empID,'del id');
-
     Employee.rembyId(empID, employees => {
-    //     // res.render('employees/deleted', {
-    //     //     user: employees,
-    //     //     pageTitle: 'deleted Employees List',
-    //     //     hasUsers: employees.length > 0,
-    //     //     activeEmp: true,
-    //     //     productCSS: true
-    //     // })
-    //     console.log(employees,'remaining emp');
-        res.redirect('/');
+        res.redirect('/empCards');
     });
-       Employee.getbyId(empID, employees => { 
-            selectedEmp.addEmp(empID,employees) 
-    
-        })
-        // selectedEmp.fetchAll(employees => {
-        //     res.render('employees/deleted', {
-        //         user: employees,
-        //         pageTitle: 'deleted Employees List',
-        //         hasUsers: employees.length > 0,
-        //         activeEmp: true,
-        //         productCSS: true
-        //     })})
+    Employee.getbyId(empID, employees => {
+        selectedEmp.addEmp(empID, employees)
+    })
 }
 
-// done posting deleted emp 
 
-// exports.getdeletedEmps = (req, res) => {
-//     const empID = req.params.empId;
-//     // console.log(empID);
-//     console.log(empID, 'del id');
-//     Employee.getbyId(empID, employees => {
-// // console.log(employees);
-//         selectedEmp.addEmp(empID,employees)
-//      res.redirect('/admin');
-
-//     })
-   
-// }
-// pending posting deleted emp 
-exports.postselectedEmp = (req, res) => {
-       const empID = req.params.empId; 
-        console.log(empID, 'del id');
-        Employee.getbyId(empID, employees => { 
-            selectedEmp.addEmp(empID,employees) 
-    
+exports.getremoveEmps = (req, res, next) => {
+    selectedEmp.fetchAll(employees => {
+        res.render('employees/deleted', {
+            user: employees,
+            pageTitle: 'All Employees',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
         })
+    });
 }

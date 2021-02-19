@@ -3,7 +3,7 @@ const path = require('path');
 const p = path.join(
     path.dirname(process.mainModule.filename),
     'data',
-    'selEmp.json'
+    'delEmp.json'
 );
 const getemployeesFromFile = cb => {
     fs.readFile(p, (err, fileContent) => {

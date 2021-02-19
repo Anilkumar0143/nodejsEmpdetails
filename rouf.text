@@ -1,0 +1,60 @@
+//getting edited emp  details
+exports.geteditedEmps = (req, res, next) => {
+    EditEmployee.fetchAll(employees => {
+        res.render('employees/edited-emp', {
+            user: employees,
+            pageTitle: 'All Employees',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
+        })
+    });
+}
+// //deleting and geting remaining emp details and updating in / employ.json
+exports.getremoveEmps = (req, res) => {
+    const empID = req.params.empId;
+    console.log(empID,'del id');
+
+    Employee.rembyId(empID, employees => {
+        
+        res.redirect('/admin');
+    });
+       Employee.getbyId(empID, employees => { 
+            selectedEmp.addEmp(empID,employees) 
+    
+        })
+ 
+}
+// exports.getdeletedEmps = (req, res, next) => {
+//     selectedEmp.fetchAll(employees => {
+//         res.render('employees/deleted', {
+//             user: employees,
+//             pageTitle: 'deleted Employees List',
+//             hasUsers: employees.length > 0,
+//             activeEmp: true,
+//             productCSS: true
+//         })})
+// }
+// done posting deleted emp 
+
+// exports.getdeletedEmps = (req, res) => {
+//     const empID = req.params.empId;
+//     // console.log(empID);
+//     console.log(empID, 'del id');
+//     Employee.getbyId(empID, employees => {
+// // console.log(employees);
+//         selectedEmp.addEmp(empID,employees)
+//      res.redirect('/admin');
+
+//     })
+   
+// }
+// pending posting deleted emp 
+// exports.postselectedEmp = (req, res) => {
+//        const empID = req.params.empId; 
+//         console.log(empID, 'del id');
+//         Employee.getbyId(empID, employees => { 
+//             selectedEmp.addEmp(empID,employees) 
+    
+//         })
+// }
