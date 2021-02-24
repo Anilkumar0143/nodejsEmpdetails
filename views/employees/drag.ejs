@@ -1,0 +1,163 @@
+<title>Title</title>
+<%- include('../includes/head.ejs') %>
+<style>
+  .example-parent {
+    /* border: 2px solid #DFA612; */
+    color: black;
+    display: flex;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  .example-origin {
+    flex-basis: 100%;
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  /* .example-draggable {
+    background-color: #4AAE9B;
+    font-weight: normal;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+  } */
+
+  .example-rejected {
+    background-color: #c22520;
+    flex-basis: 100%;
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  .example-dropzone {
+    background-color: #6DB65B;
+    flex-basis: 100%;
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  .bdrline {
+    border-bottom: 2px solid black;
+  }
+</style>
+</head>
+
+<body>
+  <%- include('../includes/navlogout.ejs') %>
+  <div class="row " id="body-row">
+    <!-- Sidebar -->
+    <%- include('../includes/sidebar.ejs') %>
+
+    <!-- MAIN -->
+    <div class="col" style="padding: 0%;margin:7%  0%;">
+      <div class="text-right">
+        <a href="/add-emp" type="button" class="btn btn-light form-control  col-2"> + Add Project </a>
+      </div>
+
+      <h2 class="text-center  m-2 ">APPIAN PROJECT</h2>
+      <div class="example-parent row mx-1">
+        <div class="example-origin  bg-light col-4" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+          <h2 class="bdrline">
+            Employees
+          </h2>
+          <% if (user.length > 0) { %>
+          <div class="row mx-5 dsp">
+            <% for (let employees of user) { %>
+            <div id="<%= employees.Id %> " class="card3d  m-2 " draggable="true" ondragstart="onDragStart(event);">
+              <div class="card h bg-warning " style="width: 18rem;">
+                <div class="row card-header m-1">
+                  <div class="col-4">
+                    <img class="card-img-top img-rounded"
+                      src="https://scontent.fblr1-5.fna.fbcdn.net/v/t1.0-1/s320x320/90595729_1088235798202704_4309944104659189760_o.jpg?_nc_cat=110&ccb=3&_nc_sid=7206a8&_nc_ohc=_8c5NBhjaCwAX89TRFO&_nc_ht=scontent.fblr1-5.fna&tp=7&oh=92b342e6740515c2e88947a20ce648e7&oe=6055B905"
+                      alt="user Img" width="180">
+                  </div>
+                  <div class="col-7 mt-3">
+                    <%= employees.firstName %>
+                  </div>
+                  <div class="row m-1">
+                    <div class="col-12">
+                      ID : <%= employees.Id %>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">
+                    Developer
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+          <% }else { %> <h1>No Employees Found!</h1> <% } %>
+        </div>
+        <div class="example-dropzone col-4" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+          <h2 class="bdrline">Selected</h2>
+        </div>
+        <div class="example-rejected col-4" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+          <h2 class="bdrline">Rejected</h2>
+        </div>
+      </div>
+
+
+
+    </div><!-- Main Col END -->
+  </div>
+  <script>
+    function onDragStart(event) {
+      event
+        .dataTransfer
+        .setData('text/plain', event.target.id);
+
+      // event
+      //   .currentTarget
+      //   .style
+
+    }
+
+    function onDragOver(event) {
+      event.preventDefault();
+
+    }
+
+    function onDrop(event) {
+      const id = event
+        .dataTransfer
+        .getData('text');
+      const draggableElement = document.getElementById(id);
+      let dropzone = event.target;
+      let children = document.querySelector(".example-dropzone");
+      let rejected = document.querySelector(".example-rejected");
+      let origin = document.querySelector(".example-origin");
+      if (dropzone === children || dropzone === rejected || dropzone === origin) {
+        dropzone.appendChild(draggableElement);
+      } else if (dropzone == children.childNodes) {
+        console.log(children.childNodes);
+        dropzone = document.querySelector(".example-dropzone");
+        console.log(dropzone);
+        dropzone.appendChild(draggableElement);
+      } else if (dropzone == rejected.childNodes) {
+        console.log(rejected.childNodes);
+        dropzone = document.querySelector(".example-rejected");
+        console.log(dropzone);
+        dropzone.appendChild(draggableElement);
+      } else if (dropzone == origin.childNodes) {
+        console.log(origin.childNodes);
+        dropzone = document.querySelector(".example-origin");
+        console.log(dropzone);
+        dropzone.appendChild(draggableElement);
+      }
+
+
+
+
+
+
+
+      event
+        .dataTransfer
+        .clearData();
+    }
+  </script>
+  <%- include('../includes/end.ejs') %>

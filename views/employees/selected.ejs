@@ -16,7 +16,7 @@
                 <div class="row m-5 dsp">
                     <% for (let employees of user) { %>
                     <div class="card3d  mx-2 my-3">
-                        <div class="card h bg-warning " style="width: 18rem;">
+                        <div class="card h bg-success " style="width: 18rem;">
                             <div class="row card-header m-1">
                                 <div class="col-4">
                                     <img class="card-img-top img-rounded"
@@ -49,7 +49,7 @@
                                         <a class="mr-2" href="/admin/<%= employees.Id %>">
                                             <button class="btn btn-primary"> View more</button>
                                         </a>
-                                        <a href="/deleted/<%= employees.Id %>" class="p-1" method="post">
+                                        <a href="/rejected/<%= employees.Id %>" class="p-1" method="post">
           
                                             <button class="btn btn-primary p-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

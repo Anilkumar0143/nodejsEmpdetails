@@ -17,9 +17,10 @@ exports.postAddEmp = (req, res, next) => {
     const dfb = req.body.dfb;
     const ip_address = req.body.ip_address;
     const Accepted = req.body.Accepted;
-    const employee = new Employee(null, firstName,LastName, useremail,userPhoneNumber,gender,dfb,ip_address,Accepted)
+    const imagPath = req.body.imgsrc;    
+    const employee = new Employee(null, firstName,LastName, useremail,userPhoneNumber,gender,dfb,ip_address,Accepted,imagPath)
     employee.save();
-    res.redirect('/admin');
+    res.redirect('/empCards');
 } 
 exports.getEditEmp = (req, res, next) => {
     res.render('session/edit-emp', {
@@ -44,7 +45,7 @@ exports.posteditedEmps = (req, res, next) => {
     const edtEmployee = new EditedEmployee(Id, efirstName,eLastName, euseremail,euserPhoneNumber,egender,edfb,eip_address,eAccepted)
     eEmployee.save();
     edtEmployee.save();
-    res.redirect('/admin');
+    res.redirect('/empCards');
 }
 
 //geting required emp detils 

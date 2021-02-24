@@ -10,10 +10,12 @@ const router = express.Router();
 router.get('/', employeesController.getemp);
 router.get('/empCards', employeesController.getempCards);
 router.get('/admin', employeesController.getAdmin);
-router.get('/deleted', employeesController.getremoveEmps);
+router.get('/selected', employeesController.getselectEmps);
 router.get('/edited', employeesController.geteditedEmps);
 router.get('/admin/:empId', employeesController.getemployee);
-router.get('/deleted', employeesController.getremoveEmps);
-router.get('/deleted/:empId', employeesController.getdeletedEmps);
+router.get('/rejected', employeesController.getremoveEmps);
+router.get('/rejected/:empId', employeesController.getrejectedEmps);
+router.get('/selected/:empId', employeesController.getselectEmp);
+router.get('/drag', employeesController.getdragemp);
 
 module.exports = router;

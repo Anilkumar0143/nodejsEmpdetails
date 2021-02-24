@@ -52,7 +52,25 @@
                 <input type="number" class="form-control" name="ip_address" id="ip_address" value="564564"
                     placeholder="Enter Your Ip Address">
             </div>
-            <div class="form-group custom-control custom-checkbox text-left">
+            <div class="input-group mb-3">
+                <div class="custom-file"><input type="file" accept="image/*" id="file"
+                    name="imgsrc"  onchange="loadFile(event)"  >
+                    <label for="file"   style="cursor: pointer;">Upload Image</label>
+                </div>
+
+                <div><img id="output"   width="80"/></div>
+                <script>
+              let img=[];
+              let loadFile = function (event) {
+                        let image = document.getElementById('output');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                        // document.getElementById('file').innerHTML = image.src   ;
+                       img.push(imge.src);
+                        localStorage.setItem("images",imag) 
+                    };
+                </script>
+            </div>
+            <div class="form-group mb-3 ">
                 <input type="checkbox" class="custom-control-input text-right" value="Yes" name="Accepted"
                     id="agreeCheck" checked>
                 <label class="custom-control-label" for="agreeCheck">I Agree all terms and conditions

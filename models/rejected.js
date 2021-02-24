@@ -14,7 +14,7 @@ const getemployeesFromFile = cb => {
       }
     });
   };
-module.exports = class SelectedEmp {
+module.exports = class RejectededEmp {
     save() {
         getemployeesFromFile(employees => {
           fs.writeFile(p, JSON.stringify(employees), err => {
@@ -38,8 +38,6 @@ module.exports = class SelectedEmp {
             // const existingdEmpIndex = selectedEmp.findIndex(p => p.Id === Id); 
             // const existingdEmp = selectedEmp[existingdEmpIndex]; 
             const existingdEmp = selectedEmp.find(p => p.Id === Id);
-
-            console.log(existingdEmp, selectedEmp);
             let updatedEmp;
             if (existingdEmp) {
                 //         updatedEmp = {

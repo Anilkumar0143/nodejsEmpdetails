@@ -16,7 +16,7 @@ const getemployeesFromFile = cb => {
   });
 };
 module.exports = class Employee {
-  constructor(id, fN, lN, uE, uPN, uG, dfb, iA, A) {
+  constructor(id, fN, lN, uE, uPN, uG, dfb, iA, A,img) {
     this.Id = id;
     this.firstName = fN;
     this.LastName = lN;
@@ -26,23 +26,23 @@ module.exports = class Employee {
     this.dfb = dfb;
     this.ip_address = iA;
     this.Accepted = A;
-
+    this.imagPath = img;
   }
 
   save() {
     getemployeesFromFile(employees => {
       if (this.Id) {
-        const existingEmp = employees.findIndex(p => p.Id === this.Id);
+                const existingEmp = employees.findIndex(p => p.Id === this.Id);
         const updateEmp = [...employees];
         updateEmp[existingEmp] = this;
         fs.writeFile(p, JSON.stringify(updateEmp), err => {
-          console.log(err,' in updating emp');
+          console.log(err, ' in updating emp');
         });
       } else {
         this.Id = Math.random().toString();
         employees.push(this);
         fs.writeFile(p, JSON.stringify(employees), err => {
-          console.log(err," in adding new emp");
+          console.log(err, " in adding new emp");
         });
       }
     });
@@ -62,7 +62,7 @@ module.exports = class Employee {
       const delemp = employees.filter(d => d.Id !== id);
       cb(delemp)
       fs.writeFile(p, JSON.stringify(delemp), err => {
-        console.log(err,' in delet');
+        console.log(err, ' in delet');
       });
     });
   }

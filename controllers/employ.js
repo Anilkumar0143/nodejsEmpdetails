@@ -1,6 +1,7 @@
 const Employee = require('../models/emps')
 const EditEmployee = require('../models/editedEmps')
-const selectedEmp = require('../models/deleted')
+const RejectedEmp = require('../models/rejected')
+const SeletedEmp = require('../models/selected')
 
 
 exports.getemp = (req, res, next) => {
@@ -14,7 +15,18 @@ exports.getemp = (req, res, next) => {
         })
     });
 }
-
+exports.getdragemp = (req, res, next) => {
+    Employee.fetchAll(employees => {
+        res.render('employees/drag', {
+            user: employees,
+            pageTitle: 'All Employees',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
+        })
+    });
+}
+ 
 exports.getAdmin = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/admin', {
@@ -44,8 +56,7 @@ exports.getempCards = (req, res, next) => {
 //geting required emp detils 
 exports.getemployee = (req, res, next) => {
     const empID = req.params.empId;
-    Employee.getbyId(empID, employees => {
-        console.log(JSON.stringify(employees));
+    Employee.getbyId(empID, employees => { 
         res.render('employees/profile', {
             user: employees,
             pageTitle: 'view  Employees',
@@ -67,20 +78,42 @@ exports.geteditedEmps = (req, res, next) => {
     });
 }
 // //deleting and geting remaining emp details and updating in / employ.json
-exports.getdeletedEmps = (req, res) => {
+exports.getrejectedEmps = (req, res) => {
     const empID = req.params.empId;
     Employee.rembyId(empID, employees => {
-        res.redirect('/empCards');
+        res.redirect('/rejected');
     });
     Employee.getbyId(empID, employees => {
-        selectedEmp.addEmp(empID, employees)
+        RejectedEmp.addEmp(empID, employees)
     })
 }
 
 
 exports.getremoveEmps = (req, res, next) => {
-    selectedEmp.fetchAll(employees => {
-        res.render('employees/deleted', {
+   RejectedEmp.fetchAll(employees => {
+        res.render('employees/rejected', {
+            user: employees,
+            pageTitle: 'All Employees',
+            hasUsers: employees.length > 0,
+            activeEmp: true,
+            productCSS: true
+        })
+    });
+}
+exports.getselectEmp = (req, res, next) => {
+    const empID = req.params.empId;  
+    Employee.rembyId(empID, employees => {
+        res.redirect('/selected');
+    });
+    Employee.getbyId(empID, employees => {
+        SeletedEmp.selectEmp(empID, employees)
+    })  
+ 
+     
+}
+exports.getselectEmps = (req, res, next) => {
+        SeletedEmp.fetchAll(employees => {
+        res.render('employees/selected', {
             user: employees,
             pageTitle: 'All Employees',
             hasUsers: employees.length > 0,

@@ -3,56 +3,62 @@
 </head>
 
 <body>
-    <%- include('../includes/navigation.ejs') %>
-    <div class="m-5 text-center">
-        <% if (user.length > 0) { %>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col"> Id</th>
-                    <th scope="col"> Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Date Of Birth</th>
-                    <th scope="col">Ip Address</th>
-                    <th scope="col">Remember</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <% for (let employees of user) { %>
-                <tr>
-                    <td>
-                        <%= employees.Id %>
-                    </td>
+    <%- include('../includes/navlogout.ejs') %>
+    <div class="row" id="body-row">
+        <!-- Sidebar -->
+        <%- include('../includes/sidebar.ejs') %>
+        <div class="col"  style="padding: 0%;margin:6%  1% 0% 1%;  ">
+            <div class="m-5 text-center">
+                <% if (user.length > 0) { %>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"> Id</th>
+                            <th scope="col"> Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Date Of Birth</th>
+                            <th scope="col">Ip Address</th>
+                            <th scope="col">Remember</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let employees of user) { %>
+                        <tr>
+                            <td>
+                                <%= employees.Id %>
+                            </td>
 
-                    <td>
-                        <%= employees.firstName %>
-                        <%= employees.LastName %>
-                    </td>
-                    <td>
-                        <%= employees.useremail %>
-                    </td>
-                    <td>
-                        <%= employees.userPhoneNumber %>
-                    </td>
-                    <td>
-                        <%= employees.gender %>
-                    </td>
-                    <td>
-                        <%= employees.dfb %>
-                    </td>
-                    <td>
-                        <%= employees.ip_address %>
-                    </td>
-                    <td>
-                        <%= employees.Accepted %>
-                    </td> 
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
-        <% }else { %> <h1>No Employees Found!</h1> <% } %>
+                            <td>
+                                <%= employees.firstName %>
+                                <%= employees.LastName %>
+                            </td>
+                            <td>
+                                <%= employees.useremail %>
+                            </td>
+                            <td>
+                                <%= employees.userPhoneNumber %>
+                            </td>
+                            <td>
+                                <%= employees.gender %>
+                            </td>
+                            <td>
+                                <%= employees.dfb %>
+                            </td>
+                            <td>
+                                <%= employees.ip_address %>
+                            </td>
+                            <td>
+                                <%= employees.Accepted %>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <% }else { %> <h1>No Employees Found!</h1> <% } %>
+            </div>
+        </div>
     </div>
     <%- include('../includes/end.ejs') %>
 </body>
