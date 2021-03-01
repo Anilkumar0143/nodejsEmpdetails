@@ -56,4 +56,11 @@ module.exports = class SelectedEmp {
       });
     });
   }
+
+  static getselbyId(id, cb) {
+    getemployeesFromFile(employees => {
+      const emp = employees.find(p => p.Id === id);
+      cb(emp)
+    });
+  }
 }

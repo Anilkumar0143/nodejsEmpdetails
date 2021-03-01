@@ -13,6 +13,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', adminRoutes);
 app.use(empRoutes);
-
+ 
 app.use(errorControllers.get404);
 app.listen(port, () => console.log(`app listening on localhost:${port}`))

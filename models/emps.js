@@ -50,22 +50,34 @@ module.exports = class Employee {
   static fetchAll(cb) {
     getemployeesFromFile(cb);
   }
-  static addEmp(Id, c) {
-    getemployeesFromFile(employees => {
-      if (this.Id) {
-        const existingEmp = employees.findIndex(p => p.Id === this.Id);
-        const updateEmp = [...employees];
-        updateEmp[existingEmp] = this;
-        fs.writeFile(p, JSON.stringify(updateEmp), err => {
-          console.log(err, ' in restore updating emp');
-        });
-      } else {
-        this.Id = Id;
-        employees.push(this);
-        fs.writeFile(p, JSON.stringify(employees), err => {
-          console.log(err, " in restore emp");
-        });
+  static addEmp(Id, emp) {
+    fs.readFile(p, (err, fileContent) => {
+      let employees = []
+      if (!err) {
+        employees  = JSON.parse(fileContent)
+      } 
+      const existingdEmp = employees .find(p => p.Id === Id);
+      let updatedEmp;
+      if (existingdEmp) {
+        
+        employees  = [...employees ]
+       } else {
+        updatedEmp = {
+          Id: Id,
+          firstName: emp.firstName,
+          LastName: emp.LastName,
+          useremail: emp.firstName,
+          userPhoneNumber: emp.userPhoneNumber,
+          gender: emp.gender,
+          dfb: emp.dfb,
+          ip_address: emp.ip_address,
+          Accepted: emp.Accepted,
+        }
+        employees = [...employees, updatedEmp]
       }
+      fs.writeFile(p, JSON.stringify(employees), err => {
+        console.log(err);
+      });
     });
   }
   static getbyId(id, cb) {

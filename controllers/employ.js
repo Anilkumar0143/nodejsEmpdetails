@@ -51,9 +51,7 @@ exports.getempCards = (req, res, next) => {
     });
 }
 
-
-
-//geting required emp detils 
+//getting required user details 
 exports.getemployee = (req, res, next) => {
     const empID = req.params.empId;
     Employee.getbyId(empID, employees => {
@@ -65,6 +63,7 @@ exports.getemployee = (req, res, next) => {
         })
     })
 }
+
 //getting edited emp  details
 exports.geteditedEmps = (req, res, next) => {
     EditEmployee.fetchAll(employees => {
@@ -87,7 +86,7 @@ exports.getrejectedEmps = (req, res) => {
         RejectedEmp.addEmp(empID, employees)
     })
 }
-
+//geting all removed or rejected users data
 exports.getremoveEmps = (req, res, next) => {
     RejectedEmp.fetchAll(employees => {
         res.render('employees/rejected', {
@@ -99,6 +98,7 @@ exports.getremoveEmps = (req, res, next) => {
         })
     });
 }
+//removing user from main data and storing in selected list
 exports.getselectEmp = (req, res, next) => {
     const empID = req.params.empId;
     Employee.rembyId(empID, employees => {
@@ -108,6 +108,7 @@ exports.getselectEmp = (req, res, next) => {
         SeletedEmp.selectEmp(empID, employees)
     })               
 }
+//all selected users
 exports.getselectEmps = (req, res, next) => {
     SeletedEmp.fetchAll(employees => {
         res.render('employees/selected', {
@@ -119,11 +120,26 @@ exports.getselectEmps = (req, res, next) => {
         })
     });
 }
-//restore
+//getting required user details 
+exports.getselectedEmp = (req, res, next) => { 
+    const empID = req.params.empId;
+    SeletedEmp.getselbyId(empID, employees => {
+        res.render('employees/profile', {
+            user: employees,
+            pageTitle: 'view  Employees',
+            activeEmp: true,
+            productCSS: true
+        })
+    })
+}
+//restore user data from rejected list to main data
 
 exports.getrestoreEmp = (req, res) => {
     const empID = req.params.empId;
-   RejectedEmp.getdelbyId(empID, employees => {
+    RejectedEmp.remdelbyId(empID, employees => {
+        res.redirect('/empCards');
+    }); 
+    RejectedEmp.getdelbyId(empID, employees => {
     Employee.addEmp(empID, employees)
     })
 }

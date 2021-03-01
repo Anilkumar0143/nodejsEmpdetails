@@ -68,4 +68,14 @@ module.exports = class RejectededEmp {
       cb(emp) 
     });
   }
+  static remdelbyId(id, cb) {
+    getemployeesFromFile(employees => {
+      const delemp = employees.filter(d => d.Id !== id);
+      cb(delemp)
+      fs.writeFile(p, JSON.stringify(delemp), err => {
+        console.log(err, ' in delet');
+      });
+    });
+  }
+
 }

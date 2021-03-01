@@ -16,20 +16,20 @@
                 </h2>
             </div>
             <div class="main bg-light" id="main">
-
+ 
                 <% if (user.length > 0) { %>
                 <div class="row mx-5 my-3 dsp">
                     <% for (let employees of user) { %>
                     <div class="card3d  mx-2 my-2">
                         <div class="card h bg-warning " style="width: 18rem;">
                             <div class="row card-header m-1">
-                                <div class="col-4">
+                                <div class="col-4 p-0 m-1">
                                     <img class="card-img-top img-rounded" src="..." alt="user Img"
                                         width="180">
                                 </div>
 
 
-                                <div class="col-7 mt-3">
+                                <div class="col-7 p-0 mt-3">
                                     <div class="col">
                                         <h5>
                                             <%= employees.firstName %>
