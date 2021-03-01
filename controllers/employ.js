@@ -26,7 +26,7 @@ exports.getdragemp = (req, res, next) => {
         })
     });
 }
- 
+
 exports.getAdmin = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/admin', {
@@ -56,7 +56,7 @@ exports.getempCards = (req, res, next) => {
 //geting required emp detils 
 exports.getemployee = (req, res, next) => {
     const empID = req.params.empId;
-    Employee.getbyId(empID, employees => { 
+    Employee.getbyId(empID, employees => {
         res.render('employees/profile', {
             user: employees,
             pageTitle: 'view  Employees',
@@ -88,9 +88,8 @@ exports.getrejectedEmps = (req, res) => {
     })
 }
 
-
 exports.getremoveEmps = (req, res, next) => {
-   RejectedEmp.fetchAll(employees => {
+    RejectedEmp.fetchAll(employees => {
         res.render('employees/rejected', {
             user: employees,
             pageTitle: 'All Employees',
@@ -101,18 +100,16 @@ exports.getremoveEmps = (req, res, next) => {
     });
 }
 exports.getselectEmp = (req, res, next) => {
-    const empID = req.params.empId;  
+    const empID = req.params.empId;
     Employee.rembyId(empID, employees => {
         res.redirect('/selected');
     });
     Employee.getbyId(empID, employees => {
         SeletedEmp.selectEmp(empID, employees)
-    })  
- 
-     
+    })               
 }
 exports.getselectEmps = (req, res, next) => {
-        SeletedEmp.fetchAll(employees => {
+    SeletedEmp.fetchAll(employees => {
         res.render('employees/selected', {
             user: employees,
             pageTitle: 'All Employees',
@@ -121,4 +118,12 @@ exports.getselectEmps = (req, res, next) => {
             productCSS: true
         })
     });
+}
+//restore
+
+exports.getrestoreEmp = (req, res) => {
+    const empID = req.params.empId;
+   RejectedEmp.getdelbyId(empID, employees => {
+    Employee.addEmp(empID, employees)
+    })
 }

@@ -5,7 +5,6 @@ const p = path.join(
   'data',
   'employ.json'
 );
-
 const getemployeesFromFile = cb => {
   fs.readFile(p, (err, fileContent) => {
     if (err) {
@@ -16,7 +15,7 @@ const getemployeesFromFile = cb => {
   });
 };
 module.exports = class Employee {
-  constructor(id, fN, lN, uE, uPN, uG, dfb, iA, A,img) {
+  constructor(id, fN, lN, uE, uPN, uG, dfb, iA, A, img) {
     this.Id = id;
     this.firstName = fN;
     this.LastName = lN;
@@ -32,7 +31,7 @@ module.exports = class Employee {
   save() {
     getemployeesFromFile(employees => {
       if (this.Id) {
-                const existingEmp = employees.findIndex(p => p.Id === this.Id);
+        const existingEmp = employees.findIndex(p => p.Id === this.Id);
         const updateEmp = [...employees];
         updateEmp[existingEmp] = this;
         fs.writeFile(p, JSON.stringify(updateEmp), err => {
@@ -50,6 +49,24 @@ module.exports = class Employee {
 
   static fetchAll(cb) {
     getemployeesFromFile(cb);
+  }
+  static addEmp(Id, c) {
+    getemployeesFromFile(employees => {
+      if (this.Id) {
+        const existingEmp = employees.findIndex(p => p.Id === this.Id);
+        const updateEmp = [...employees];
+        updateEmp[existingEmp] = this;
+        fs.writeFile(p, JSON.stringify(updateEmp), err => {
+          console.log(err, ' in restore updating emp');
+        });
+      } else {
+        this.Id = Id;
+        employees.push(this);
+        fs.writeFile(p, JSON.stringify(employees), err => {
+          console.log(err, " in restore emp");
+        });
+      }
+    });
   }
   static getbyId(id, cb) {
     getemployeesFromFile(employees => {
