@@ -1,5 +1,7 @@
 const Employee = require('../models/emps') 
 const EditedEmployee = require('../models/editedEmps')  
+
+//geting added emps
 exports.getAddEmp = (req, res, next) => {
     res.render('session/add-emp', {
         pageTitle: 'Add Employees',
@@ -8,6 +10,8 @@ exports.getAddEmp = (req, res, next) => {
         activeAddProduct: true
     });
 }
+
+//posting added emps
 exports.postAddEmp = (req, res, next) => {
     const firstName = req.body.firstName;
     const LastName = req.body.LastName;
@@ -22,6 +26,8 @@ exports.postAddEmp = (req, res, next) => {
     employee.save();
     res.redirect('/empCards');
 } 
+
+// geting edited emps
 exports.getEditEmp = (req, res, next) => {
     res.render('session/edit-emp', {
         pageTitle: 'Edit Employee',
@@ -31,6 +37,7 @@ exports.getEditEmp = (req, res, next) => {
     });
  
 }
+//posting edited emps
 exports.posteditedEmps = (req, res, next) => {
     const Id = req.body.Id;
     const efirstName = req.body.efirstName;

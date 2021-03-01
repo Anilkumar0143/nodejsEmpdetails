@@ -3,7 +3,7 @@ const EditEmployee = require('../models/editedEmps')
 const RejectedEmp = require('../models/rejected')
 const SeletedEmp = require('../models/selected')
 
-
+//geting emp in table formate
 exports.getemp = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/emp', {
@@ -15,6 +15,8 @@ exports.getemp = (req, res, next) => {
         })
     });
 }
+
+// geting emp and can be draged from one place to another
 exports.getdragemp = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/drag', {
@@ -27,6 +29,7 @@ exports.getdragemp = (req, res, next) => {
     });
 }
 
+//geting emp in table formate with some actions
 exports.getAdmin = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/admin', {
@@ -39,6 +42,7 @@ exports.getAdmin = (req, res, next) => {
     });
 }
 
+//geting employee details in card view and also with some actions
 exports.getempCards = (req, res, next) => {
     Employee.fetchAll(employees => {
         res.render('employees/empCards', {
@@ -76,6 +80,7 @@ exports.geteditedEmps = (req, res, next) => {
         })
     });
 }
+
 // //deleting and geting remaining emp details and updating in / employ.json
 exports.getrejectedEmps = (req, res) => {
     const empID = req.params.empId;
@@ -86,6 +91,7 @@ exports.getrejectedEmps = (req, res) => {
         RejectedEmp.addEmp(empID, employees)
     })
 }
+
 //geting all removed or rejected users data
 exports.getremoveEmps = (req, res, next) => {
     RejectedEmp.fetchAll(employees => {
@@ -98,6 +104,7 @@ exports.getremoveEmps = (req, res, next) => {
         })
     });
 }
+
 //removing user from main data and storing in selected list
 exports.getselectEmp = (req, res, next) => {
     const empID = req.params.empId;
@@ -108,6 +115,7 @@ exports.getselectEmp = (req, res, next) => {
         SeletedEmp.selectEmp(empID, employees)
     })               
 }
+
 //all selected users
 exports.getselectEmps = (req, res, next) => {
     SeletedEmp.fetchAll(employees => {
@@ -120,6 +128,7 @@ exports.getselectEmps = (req, res, next) => {
         })
     });
 }
+
 //getting required user details 
 exports.getselectedEmp = (req, res, next) => { 
     const empID = req.params.empId;
@@ -132,8 +141,8 @@ exports.getselectedEmp = (req, res, next) => {
         })
     })
 }
-//restore user data from rejected list to main data
 
+//restore user data from rejected list to main data
 exports.getrestoreEmp = (req, res) => {
     const empID = req.params.empId;
     RejectedEmp.remdelbyId(empID, employees => {

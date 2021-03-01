@@ -13,7 +13,7 @@ router.get('/edited', employeesController.geteditedEmps);
 router.get('/rejected', employeesController.getremoveEmps);
 router.get('/drag', employeesController.getdragemp);
 router.get('/rejected/:empId', employeesController.getrejectedEmps);
-// router.get('/selected/:empId', employeesController.getselectEmp);
+router.get('/select/:empId', employeesController.getselectEmp);
 router.get('/selected/:empId', employeesController.getselectedEmp);
 router.get('/admin/:empId', employeesController.getemployee);
 router.get('/empCards/:empId', employeesController.getrestoreEmp);

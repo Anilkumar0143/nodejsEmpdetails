@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+
 const p = path.join(
   path.dirname(process.mainModule.filename),
   'data',
   'selEmp.json'
 );
+
 const getemployeesFromFile = cb => {
   fs.readFile(p, (err, fileContent) => {
     if (err) {
@@ -14,6 +16,7 @@ const getemployeesFromFile = cb => {
     }
   });
 };
+
 module.exports = class SelectedEmp {
   save() {
     getemployeesFromFile(employees => {
@@ -56,7 +59,6 @@ module.exports = class SelectedEmp {
       });
     });
   }
-
   static getselbyId(id, cb) {
     getemployeesFromFile(employees => {
       const emp = employees.find(p => p.Id === id);
